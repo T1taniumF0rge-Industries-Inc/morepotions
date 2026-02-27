@@ -51,16 +51,6 @@ public class MorePotionsConfig {
         LUCK_POTION_ENABLED = data.LUCK_POTION_ENABLED;
         GLOWING_POTION_ENABLED = data.GLOWING_POTION_ENABLED;
         BLINDNESS_POTION_ENABLED = data.BLINDNESS_POTION_ENABLED;
-            if (data == null) data = new Data();
-
-            LEVITATION_POTION_ENABLED = data.LEVITATION_POTION_ENABLED;
-            DECAY_POTION_ENABLED = data.DECAY_POTION_ENABLED;
-            NAUSEA_POTION_ENABLED = data.NAUSEA_POTION_ENABLED;
-            LUCK_POTION_ENABLED = data.LUCK_POTION_ENABLED;
-            GLOWING_POTION_ENABLED = data.GLOWING_POTION_ENABLED;
-            BLINDNESS_POTION_ENABLED = data.BLINDNESS_POTION_ENABLED;
-        } catch (IOException ignored) {
-        }
     }
 
     private static void saveDefaults(Path path) throws IOException {

@@ -1,5 +1,6 @@
 package net.itsyourdriver.morepotions.potion;
 
+import net.itsyourdriver.morepotions.MorePotions;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.potion.Potion;
@@ -7,30 +8,26 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
-public class ModPotions {
-    public static final Potion LEVITATION_POTION = register("levitation_potion",
+public final class ModPotions {
+    public static final Potion LEVITATION_POTION = registerPotion("levitation_potion",
             new Potion(new StatusEffectInstance(StatusEffects.LEVITATION, 600, 0)));
 
-    public static final Potion DECAY_POTION = register("decay_potion",
+    public static final Potion DECAY_POTION = registerPotion("decay_potion",
             new Potion(new StatusEffectInstance(StatusEffects.WITHER, 900, 0)));
 
-    public static final Potion NAUSEA_POTION = register("nausea_potion",
+    public static final Potion NAUSEA_POTION = registerPotion("nausea_potion",
             new Potion(new StatusEffectInstance(StatusEffects.NAUSEA, 600, 0)));
 
-    public static final Potion GLOWING_POTION = register("glowing_potion",
+    public static final Potion GLOWING_POTION = registerPotion("glowing_potion",
             new Potion(new StatusEffectInstance(StatusEffects.GLOWING, 3600, 0)));
 
-    public static final Potion BLINDNESS_POTION = register("blindness_potion",
+    public static final Potion BLINDNESS_POTION = registerPotion("blindness_potion",
             new Potion(new StatusEffectInstance(StatusEffects.BLINDNESS, 300, 0)));
 
-    private static Potion register(String id, Potion potion) {
-        return Registry.register(Registries.POTION, new Identifier("morepotions", id), potion);
+    private ModPotions() {
     }
 
-    public static void init() {
-        // static init trigger
-    }
-}
+    private static Potion registerPotion(String id, Potion potion) {
         return Registry.register(Registries.POTION, new Identifier(MorePotions.MOD_ID, id), potion);
     }
 
