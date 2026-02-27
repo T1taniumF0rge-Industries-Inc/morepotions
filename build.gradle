@@ -10,6 +10,13 @@ base {
     archivesName = project.mod_id
 }
 
+sourceSets {
+    main {
+        java.srcDirs = ['fabric/src/main/java']
+        resources.srcDirs = ['fabric/src/main/resources']
+    }
+}
+
 repositories {
     mavenCentral()
     maven { url = 'https://maven.fabricmc.net/' }
@@ -56,7 +63,7 @@ publishing {
 
 tasks.register('verifyNoConflictMarkers') {
     doLast {
-        def roots = [file('src'), file('build.gradle'), file('settings.gradle'), file('gradle.properties')]
+        def roots = [file('fabric/src'), file('build.gradle'), file('settings.gradle'), file('gradle.properties')]
         def offenders = []
 
         roots.each { root ->
@@ -64,8 +71,8 @@ tasks.register('verifyNoConflictMarkers') {
             if (root.isFile()) {
                 def text = root.getText('UTF-8')
                 def markerA = '<<<' + '<<<<'
-        def markerB = '===' + '===='
-        def markerC = '>>>' + '>>>>'
+                def markerB = '===' + '===='
+                def markerC = '>>>' + '>>>>'
 
                 if (text.contains(markerA) || text.contains(markerB) || text.contains(markerC)) {
                     offenders << root
@@ -78,8 +85,8 @@ tasks.register('verifyNoConflictMarkers') {
             }.files.each { f ->
                 def text = f.getText('UTF-8')
                 def markerA = '<<<' + '<<<<'
-        def markerB = '===' + '===='
-        def markerC = '>>>' + '>>>>'
+                def markerB = '===' + '===='
+                def markerC = '>>>' + '>>>>'
 
                 if (text.contains(markerA) || text.contains(markerB) || text.contains(markerC)) {
                     offenders << f
