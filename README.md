@@ -1,24 +1,21 @@
 # More Potions
 
-Adds a couple of potions into minecraft, all of which use existing vanilla effects.
+Adds a couple of potions into minecraft that all make use of existing vanilla effects.
 
+## New Potions
 
-
-# Potions Added + Ingredients:
-
-- Leviation (Shulker Shell)
-- Withering / Decay (Wither Rose)
-- Nausea (Poisonous Potato)
-- Luck (Requires a thick potion, Rabbits Foot)
-- Glowing (Glow Berries)
-- Blindness (Ink Sac)
+- Potion of **Levitation** (_Awkward Potion_ -> Shulker Shell)
+- Potion of **Decay** (_Awkward Potion_  -> Wither Rose)
+- Potion of **Nausea** (_Awkward Potion_  -> Poisonous Potato)
+- Potion of **Glowing** (_Awkward Potion_  -> Glow Inc Sac)
+- Potion of **Blindness** (_Awkward Potion_  -> Ink Sac)
+- Potion of **Luck** (_Thick Potion_ -> Rabbit's Foot)
 
  
-# Default Config
+## Default Configuration
 ``` 
 ["Configs for More Potions (Note: These will still show up in the creative menu, but disabling them here will disable the ability to brew them"]
 
-	["Configs for More Potions (Note: These will still show up in the creative menu, but disabling them here will disable the ability to brew them".")"]
 		#Should the levitation potion be enabled?
 		LEVITATION_POTION_ENABLED = true
 		#Should the decay (wither) potion be enabled?
@@ -34,8 +31,6 @@ Adds a couple of potions into minecraft, all of which use existing vanilla effec
 
 ```
 
+Credit to [KaupenJoe](https://github.com/Kaupenjoe) for the amazing Forge / Fabric tutorials. I am using his Forge tutorial repository as a base. (that is why he shows up on the contributors list)
 
-Credit to KaupenJoe for the amazing forge / fabric tutorials. I am using his forge tutorial repo as a base. (that is why he shows up on the contributors list)
-
-
-# Do not ask me to port this mod to any other mod loader. 
+Project maintained from now on (2026) by [Titan1um](https://github.com/T1taniumF0rge) and his [team](https://github.com/T1taniumF0rge-Industries-Inc)
