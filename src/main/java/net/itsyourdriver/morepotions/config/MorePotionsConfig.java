@@ -36,7 +36,13 @@ public class MorePotionsConfig {
             }
 
             Data data = GSON.fromJson(Files.readString(path), Data.class);
+<<<<<<< HEAD
             if (data == null) data = new Data();
+=======
+            if (data == null) {
+                data = new Data();
+            }
+>>>>>>> 5431de3ce79071d4eecbdb006b9f47d38058a8d6
 
             LEVITATION_POTION_ENABLED = data.LEVITATION_POTION_ENABLED;
             DECAY_POTION_ENABLED = data.DECAY_POTION_ENABLED;
@@ -52,4 +58,8 @@ public class MorePotionsConfig {
         Files.createDirectories(path.getParent());
         Files.writeString(path, GSON.toJson(new Data()));
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5431de3ce79071d4eecbdb006b9f47d38058a8d6

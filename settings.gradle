@@ -8,4 +8,8 @@ pluginManagement {
 
 plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5431de3ce79071d4eecbdb006b9f47d38058a8d6

@@ -32,6 +32,29 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
     options.release = 17
+<<<<<<< HEAD
+=======
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+jar {
+    from('LICENSE') {
+        rename { "${it}_${project.base.archivesName.get()}" }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+>>>>>>> 5431de3ce79071d4eecbdb006b9f47d38058a8d6
 }
 
 java {
