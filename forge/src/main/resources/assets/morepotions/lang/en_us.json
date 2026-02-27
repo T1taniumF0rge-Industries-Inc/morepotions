@@ -1,0 +1,27 @@
+{
+  "item.minecraft.potion.effect.levitation_potion": "Potion of Levitation",
+  "item.minecraft.splash_potion.effect.levitation_potion": "Splash Potion of Levitation",
+  "item.minecraft.lingering_potion.effect.levitation_potion": "Lingering Potion of Levitation",
+  "item.minecraft.tipped_arrow.effect.levitation_potion": "Arrow of Levitation",
+
+  "item.minecraft.potion.effect.decay_potion": "Potion of Decay",
+  "item.minecraft.splash_potion.effect.decay_potion": "Splash Potion of Decay",
+  "item.minecraft.lingering_potion.effect.decay_potion": "Lingering Potion of Decay",
+  "item.minecraft.tipped_arrow.effect.decay_potion": "Arrow of Decay",
+
+  "item.minecraft.potion.effect.nausea_potion": "Potion of Nausea",
+  "item.minecraft.splash_potion.effect.nausea_potion": "Splash Potion of Nausea",
+  "item.minecraft.lingering_potion.effect.nausea_potion": "Lingering Potion of Nausea",
+  "item.minecraft.tipped_arrow.effect.nausea_potion": "Arrow of Nausea",
+
+  "item.minecraft.potion.effect.glowing_potion": "Potion of Glowing",
+  "item.minecraft.splash_potion.effect.glowing_potion": "Splash Potion of Glowing",
+  "item.minecraft.lingering_potion.effect.glowing_potion": "Lingering Potion of Glowing",
+  "item.minecraft.tipped_arrow.effect.glowing_potion": "Arrow of Glowing",
+
+  "item.minecraft.potion.effect.blindness_potion": "Potion of Blindness",
+  "item.minecraft.splash_potion.effect.blindness_potion": "Splash Potion of Blindness",
+  "item.minecraft.lingering_potion.effect.blindness_potion": "Lingering Potion of Blindness",
+  "item.minecraft.tipped_arrow.effect.blindness_potion": "Arrow of Blindness"
+
+}
