@@ -2,6 +2,7 @@ package net.itsyourdriver.morepotions.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.IOException;
@@ -30,19 +31,27 @@ public class MorePotionsConfig {
     public static void load() {
         Path path = FabricLoader.getInstance().getConfigDir().resolve("morepotions-common.json");
 
+        Data data = new Data();
         try {
             if (Files.notExists(path)) {
                 saveDefaults(path);
             }
 
-            Data data = GSON.fromJson(Files.readString(path), Data.class);
-<<<<<<< HEAD
-            if (data == null) data = new Data();
-=======
-            if (data == null) {
-                data = new Data();
+            String configJson = Files.readString(path);
+            Data parsedData = GSON.fromJson(configJson, Data.class);
+            if (parsedData != null) {
+                data = parsedData;
             }
->>>>>>> 5431de3ce79071d4eecbdb006b9f47d38058a8d6
+        } catch (IOException | JsonParseException ignored) {
+        }
+
+        LEVITATION_POTION_ENABLED = data.LEVITATION_POTION_ENABLED;
+        DECAY_POTION_ENABLED = data.DECAY_POTION_ENABLED;
+        NAUSEA_POTION_ENABLED = data.NAUSEA_POTION_ENABLED;
+        LUCK_POTION_ENABLED = data.LUCK_POTION_ENABLED;
+        GLOWING_POTION_ENABLED = data.GLOWING_POTION_ENABLED;
+        BLINDNESS_POTION_ENABLED = data.BLINDNESS_POTION_ENABLED;
+            if (data == null) data = new Data();
 
             LEVITATION_POTION_ENABLED = data.LEVITATION_POTION_ENABLED;
             DECAY_POTION_ENABLED = data.DECAY_POTION_ENABLED;
@@ -58,8 +67,4 @@ public class MorePotionsConfig {
         Files.createDirectories(path.getParent());
         Files.writeString(path, GSON.toJson(new Data()));
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 5431de3ce79071d4eecbdb006b9f47d38058a8d6

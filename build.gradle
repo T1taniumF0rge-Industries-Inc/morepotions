@@ -32,8 +32,14 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
     options.release = 17
-<<<<<<< HEAD
-=======
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
 }
 
 java {
@@ -54,25 +60,47 @@ publishing {
             from components.java
         }
     }
->>>>>>> 5431de3ce79071d4eecbdb006b9f47d38058a8d6
 }
 
-java {
-    withSourcesJar()
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
+tasks.register('verifyNoConflictMarkers') {
+    doLast {
+        def roots = [file('src'), file('build.gradle'), file('settings.gradle'), file('gradle.properties')]
+        def offenders = []
 
-jar {
-    from('LICENSE') {
-        rename { "${it}_${project.base.archivesName.get()}" }
-    }
-}
+        roots.each { root ->
+            if (!root.exists()) return
+            if (root.isFile()) {
+                def text = root.getText('UTF-8')
+                def markerA = '<<<' + '<<<<'
+        def markerB = '===' + '===='
+        def markerC = '>>>' + '>>>>'
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
+                if (text.contains(markerA) || text.contains(markerB) || text.contains(markerC)) {
+                    offenders << root
+                }
+                return
+            }
+
+            fileTree(root).matching {
+                include '**/*.java', '**/*.json', '**/*.gradle', '**/*.properties', '**/*.toml', '**/*.mcmeta'
+            }.files.each { f ->
+                def text = f.getText('UTF-8')
+                def markerA = '<<<' + '<<<<'
+        def markerB = '===' + '===='
+        def markerC = '>>>' + '>>>>'
+
+                if (text.contains(markerA) || text.contains(markerB) || text.contains(markerC)) {
+                    offenders << f
+                }
+            }
+        }
+
+        if (!offenders.isEmpty()) {
+            throw new GradleException('Merge conflict markers found in: ' + offenders.collect { it.path }.join(', '))
         }
     }
+}
+
+tasks.named('check') {
+    dependsOn tasks.named('verifyNoConflictMarkers')
 }

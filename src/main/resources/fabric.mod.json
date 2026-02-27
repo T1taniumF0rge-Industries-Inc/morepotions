@@ -3,15 +3,11 @@
   "id": "morepotions",
   "version": "${version}",
   "name": "More Potions",
-<<<<<<< HEAD
-  "description": "Adds more potions to Minecraft!",
-  "authors": ["Itsyourdriver","Titan1um"],
-=======
-  "description": "Adds more potions to minecraft! Fully configurable!",
+  "description": "Adds more potions to minecraft!",
   "authors": [
-    "Itsyourdriver"
+    "Itsyourdriver",
+    "Titan1um"
   ],
->>>>>>> 5431de3ce79071d4eecbdb006b9f47d38058a8d6
   "license": "MIT",
   "environment": "*",
   "entrypoints": {
@@ -25,8 +21,4 @@
     "java": ">=17",
     "fabric-api": "*"
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 5431de3ce79071d4eecbdb006b9f47d38058a8d6
