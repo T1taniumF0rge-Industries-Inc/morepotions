@@ -1,6 +1,8 @@
-# More Potions
+# Missing Potions!
 
 Adds a couple of potions into minecraft that all make use of existing vanilla effects.
+
+This mod is fairly vanilla friendly and allows you to disable certain potions if you don't want them.
 
 ## New Potions
 
