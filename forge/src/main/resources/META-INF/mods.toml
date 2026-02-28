@@ -17,7 +17,7 @@ license="MIT"
 # The modid of the mod
 modId="morepotions" #mandatory
 # The version number of the mod
-version="1.1" #mandatory
+version="${mod_version}" #mandatory
 # A display name for the mod
 displayName="More Potions" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://docs.minecraftforge.net/en/latest/misc/updatechecker/
@@ -58,7 +58,7 @@ description='''Adds more potions to minecraft! Fully configurable!'''
 [[dependencies.morepotions]]
     modId="minecraft"
     mandatory=true
-    # This version range declares a minimum of the current minecraft version up to but not including the next major version
+    # Restrict this mod to exactly Minecraft 1.20.1.
     versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"

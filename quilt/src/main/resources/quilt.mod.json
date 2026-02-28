@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "net.itsyourdriver.morepotions",
+    "id": "morepotions",
+    "version": "${version}",
+    "metadata": {
+      "name": "More Potions",
+      "description": "Adds more potions to minecraft!",
+      "contributors": {
+        "Itsyourdriver": "Owner",
+        "Titan1um": "Contributor"
+      },
+      "license": "MIT"
+    },
+    "entrypoints": {
+      "init": [
+        "net.itsyourdriver.morepotions.MorePotions"
+      ]
+    },
+    "depends": [
+      {
+        "id": "quilt_loader",
+        "versions": ">=0.26.0"
+      },
+      {
+        "id": "minecraft",
+        "versions": "1.20.1"
+      },
+      {
+        "id": "java",
+        "versions": ">=17"
+      }
+    ]
+  }
+}
