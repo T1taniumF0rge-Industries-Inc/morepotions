@@ -48,6 +48,7 @@ public class MorePotions {
 
         if (MorePotionsCommonConfigs.LUCK_POTION_ENABLED.get()) {
             builder.addMix(Potions.THICK, Items.RABBIT_FOOT, Potions.LUCK);
+            registerLuckModifiers(builder);
         }
 
         if (MorePotionsCommonConfigs.GLOWING_POTION_ENABLED.get()) {
@@ -58,6 +59,29 @@ public class MorePotions {
         if (MorePotionsCommonConfigs.BLINDNESS_POTION_ENABLED.get()) {
             builder.addMix(Potions.AWKWARD, Items.INK_SAC, ModPotions.BLINDNESS_POTION);
             registerStandardModifiers(builder, ModPotions.BLINDNESS_POTION, ModPotions.LONG_BLINDNESS_POTION, null, false);
+        }
+    }
+
+
+    private static void registerLuckModifiers(net.minecraft.world.item.alchemy.PotionBrewing.Builder builder) {
+        for (int level = 1; level <= 5; level++) {
+            for (int extensionTier = 0; extensionTier < 3; extensionTier++) {
+                builder.addMix(
+                        ModPotions.getLuckPotion(level, extensionTier),
+                        Items.REDSTONE,
+                        ModPotions.getLuckPotion(level, extensionTier + 1)
+                );
+            }
+        }
+
+        for (int extensionTier = 0; extensionTier <= 3; extensionTier++) {
+            for (int level = 1; level < 5; level++) {
+                builder.addMix(
+                        ModPotions.getLuckPotion(level, extensionTier),
+                        Items.GLOWSTONE_DUST,
+                        ModPotions.getLuckPotion(level + 1, extensionTier)
+                );
+            }
         }
     }
 
