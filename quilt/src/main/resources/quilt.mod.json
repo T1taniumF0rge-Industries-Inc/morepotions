@@ -30,6 +30,10 @@
       {
         "id": "java",
         "versions": ">=17"
+      },
+      {
+        "id": "fabric-api",
+        "versions": "*"
       }
     ]
   }
