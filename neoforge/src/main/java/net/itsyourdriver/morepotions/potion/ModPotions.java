@@ -1,10 +1,12 @@
 package net.itsyourdriver.morepotions.potion;
 
 import net.itsyourdriver.morepotions.MorePotions;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.Potions;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -43,7 +45,43 @@ public final class ModPotions {
     public static final DeferredHolder<Potion, Potion> LONG_BLINDNESS_POTION = POTIONS.register("long_blindness_potion",
             () -> new Potion(new MobEffectInstance(MobEffects.BLINDNESS, 900, 0)));
 
+    private static final int[] LUCK_DURATIONS = {6000, 18000, 36000, 72000};
+    private static final Holder<Potion>[][] LUCK_VARIANTS = createLuckVariants();
+
     private ModPotions() {}
+
+    private static Holder<Potion>[][] createLuckVariants() {
+        @SuppressWarnings("unchecked")
+        Holder<Potion>[][] variants = (Holder<Potion>[][]) new Holder[5][4];
+        variants[0][0] = Potions.LUCK;
+
+        for (int levelIndex = 0; levelIndex < variants.length; levelIndex++) {
+            for (int extensionIndex = 0; extensionIndex < variants[levelIndex].length; extensionIndex++) {
+                if (levelIndex == 0 && extensionIndex == 0) {
+                    continue;
+                }
+
+                String id = "luck_l" + (levelIndex + 1) + "_e" + extensionIndex;
+                int duration = LUCK_DURATIONS[extensionIndex];
+                int amplifier = levelIndex;
+                variants[levelIndex][extensionIndex] = POTIONS.register(id,
+                        () -> new Potion(new MobEffectInstance(MobEffects.LUCK, duration, amplifier)));
+            }
+        }
+
+        return variants;
+    }
+
+    public static Holder<Potion> getLuckPotion(int level, int extensionTier) {
+        if (level < 1 || level > 5) {
+            throw new IllegalArgumentException("Luck level must be in [1..5]");
+        }
+        if (extensionTier < 0 || extensionTier > 3) {
+            throw new IllegalArgumentException("Luck extension tier must be in [0..3]");
+        }
+
+        return LUCK_VARIANTS[level - 1][extensionTier];
+    }
 
     public static void register(IEventBus eventBus) {
         POTIONS.register(eventBus);
