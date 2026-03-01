@@ -40,6 +40,9 @@ dependencies {
 processResources {
     inputs.property 'version', project.version
 
+    // Ensure Quilt uses quilt.mod.json metadata only for this artifact.
+    exclude 'fabric.mod.json'
+
     filesMatching('quilt.mod.json') {
         expand 'version': project.version
     }
