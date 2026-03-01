@@ -7,8 +7,15 @@ plugins {
 version = mod_version
 group = mod_group_id
 
+def neoforgeArchiveVersion = "${mod_version}-${minecraft_version}neoforge"
+
 base {
     archivesName = mod_id
+}
+
+// Keep metadata version as mod_version while formatting output jar names per loader.
+tasks.withType(AbstractArchiveTask).configureEach {
+    archiveVersion.set(neoforgeArchiveVersion)
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)

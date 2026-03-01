@@ -6,7 +6,7 @@
     "version": "${version}",
     "metadata": {
       "name": "More Potions",
-      "description": "Adds more potions to minecraft!",
+      "description": "Adds more potions to minecraft! Fully configurable and based on existing vanilla status effects",
       "contributors": {
         "Itsyourdriver": "Owner",
         "Titan1um": "Contributor"
