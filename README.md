@@ -1,5 +1,7 @@
 # Missing Potions!
 
+![Missing Potions](https://cdn.modrinth.com/data/cached_images/7c91a04a17a79fe76354931d0765de268216acd9.png)
+
 Adds more potions to the game, all of which use existing vanilla effects.
 
 This mod is fairly vanilla friendly and allows you to disable certain potions if you don't want them.
@@ -30,9 +32,13 @@ This mod is fairly vanilla friendly and allows you to disable certain potions if
 		GLOWING_POTION_ENABLED = true
 		#Should the blindness potion be enabled?
 		BLINDNESS_POTION_ENABLED = true
-
 ```
 
 Credit to [KaupenJoe](https://github.com/Kaupenjoe) for the amazing Forge / Fabric tutorials. I am using his Forge tutorial repository as a base. (that is why he shows up on the contributors list)
 
 Project maintained from now on (2026) by [Titan1um](https://github.com/T1taniumF0rge) and his [team](https://github.com/T1taniumF0rge-Industries-Inc)
+
+---
+Check out my other mods/datapacks here:
+
+<a href="https://modrinth.com/datapack/unpackableminecarts"><img src="https://cdn.modrinth.com/data/cached_images/a5543cbd38685aa92155dc2c42f82f54c44d848e.png" width="576" height="324"> </a>
