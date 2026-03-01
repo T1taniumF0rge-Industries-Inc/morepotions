@@ -39,7 +39,7 @@ authors="Itsyourdriver" #optional
 #displayTest="MATCH_VERSION" # MATCH_VERSION is the default if nothing is specified (#optional)
 
 # The description text for the mod (multi line!) (#mandatory)
-description='''Adds more potions to minecraft! Fully configurable!'''
+description='''Adds more potions to minecraft! Fully configurable and based on existing vanilla status effects'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.morepotions]] #optional
     # the modid of the dependency

@@ -3,7 +3,7 @@
   "id": "morepotions",
   "version": "${version}",
   "name": "More Potions",
-  "description": "Adds more potions to minecraft!",
+  "description": "Adds more potions to minecraft! Fully configurable and based on existing vanilla status effects",
   "authors": [
     "Itsyourdriver",
     "Titan1um"
