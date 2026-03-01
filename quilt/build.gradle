@@ -6,8 +6,15 @@ plugins {
 version = project.mod_version
 group = project.mod_group_id
 
+def quiltArchiveVersion = "${project.mod_version}-${project.minecraft_version}quilt"
+
 base {
-    archivesName = "${project.mod_id}-quilt"
+    archivesName = "${project.mod_id}"
+}
+
+// Keep metadata version as mod_version while formatting output jar names per loader.
+tasks.withType(AbstractArchiveTask).configureEach {
+    archiveVersion.set(quiltArchiveVersion)
 }
 
 sourceSets {
@@ -32,6 +39,9 @@ dependencies {
 
 processResources {
     inputs.property 'version', project.version
+
+    // Ensure Quilt uses quilt.mod.json metadata only for this artifact.
+    exclude 'fabric.mod.json'
 
     filesMatching('quilt.mod.json') {
         expand 'version': project.version
