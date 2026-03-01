@@ -17,21 +17,23 @@ This mod is fairly vanilla friendly and allows you to disable certain potions if
 
  
 ## Default Configuration
+The configuration file for the mod will most likely be located in the `/config(s)` folder of your world folder!
+
 ``` 
 ["Configs for More Potions (Note: These will still show up in the creative menu, but disabling them here will disable the ability to brew them"]
 
-		#Should the levitation potion be enabled?
-		LEVITATION_POTION_ENABLED = true
-		#Should the decay (wither) potion be enabled?
-		DECAY_POTION_ENABLED = true
-		#Should the nausea potion be enabled?
-		NAUSEA_POTION_ENABLED = true
-		#Should the luck potion be enabled?
-		LUCK_POTION_ENABLED = true
-		#Should the glowing potion be enabled?
-		GLOWING_POTION_ENABLED = true
-		#Should the blindness potion be enabled?
-		BLINDNESS_POTION_ENABLED = true
+	# Should the levitation potion be enabled?
+	LEVITATION_POTION_ENABLED = true
+	# Should the decay (wither) potion be enabled?
+	DECAY_POTION_ENABLED = true
+	# Should the nausea potion be enabled?
+	NAUSEA_POTION_ENABLED = true
+	# Should the luck potion be enabled?
+	LUCK_POTION_ENABLED = true
+	# Should the glowing potion be enabled?
+	GLOWING_POTION_ENABLED = true
+	# Should the blindness potion be enabled?
+	BLINDNESS_POTION_ENABLED = true
 ```
 
 Credit to [KaupenJoe](https://github.com/Kaupenjoe) for the amazing Forge / Fabric tutorials. I am using his Forge tutorial repository as a base. (that is why he shows up on the contributors list)
