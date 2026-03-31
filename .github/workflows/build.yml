@@ -21,7 +21,7 @@ jobs:
             build_cmd: './gradlew -p neoforge build'
             artifact_path: 'neoforge/build/libs/'
           - loader: quilt
-            java: '17'
+            java: '21'
             build_cmd: './gradlew -p quilt build'
             artifact_path: 'quilt/build/libs/'
     steps:
