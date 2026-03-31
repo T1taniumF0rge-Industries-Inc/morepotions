@@ -58,7 +58,7 @@ description='''Adds more potions to minecraft! Fully configurable and based on e
 [[dependencies.morepotions]]
     modId="minecraft"
     mandatory=true
-    # Restrict this mod to exactly Minecraft 1.20.1.
+    # Restrict this mod to exactly Minecraft 1.21.
     versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
