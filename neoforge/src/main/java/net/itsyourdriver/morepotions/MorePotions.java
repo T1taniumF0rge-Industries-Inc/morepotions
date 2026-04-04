@@ -11,6 +11,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import org.slf4j.Logger;
 
@@ -22,7 +23,7 @@ public class MorePotions {
     public MorePotions(IEventBus modEventBus, ModContainer modContainer) {
         ModPotions.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(this::registerBrewingRecipes);
+        NeoForge.EVENT_BUS.addListener(this::registerBrewingRecipes);
         modContainer.registerConfig(ModConfig.Type.COMMON, MorePotionsCommonConfigs.SPEC, "morepotions-common.toml");
     }
 
