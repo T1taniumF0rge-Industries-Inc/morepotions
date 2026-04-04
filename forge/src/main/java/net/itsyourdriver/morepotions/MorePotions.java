@@ -31,13 +31,18 @@ public class MorePotions {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModPotions.register(modEventBus);
-        modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(this::registerBrewingRecipes);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MorePotionsCommonConfigs.SPEC, "morepotions-common.toml");
+        modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::addCreative);
+        MinecraftForge.EVENT_BUS.addListener(this::registerBrewingRecipes);
+
+        ModLoadingContext.get().registerConfig(
+                ModConfig.Type.COMMON,
+                MorePotionsCommonConfigs.SPEC,
+                "morepotions-common.toml"
+        );
 
         MinecraftForge.EVENT_BUS.register(this);
-        modEventBus.addListener(this::addCreative);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {}
@@ -47,17 +52,29 @@ public class MorePotions {
 
         if (MorePotionsCommonConfigs.LEVITATION_POTION_ENABLED.get()) {
             builder.addMix(Potions.AWKWARD, Items.SHULKER_SHELL, ModPotions.holderOf(ModPotions.LEVITATION_POTION));
-            registerStandardModifiers(builder, ModPotions.holderOf(ModPotions.LEVITATION_POTION), ModPotions.holderOf(ModPotions.LONG_LEVITATION_POTION), ModPotions.holderOf(ModPotions.STRONG_LEVITATION_POTION), true);
+            registerStandardModifiers(builder,
+                    ModPotions.holderOf(ModPotions.LEVITATION_POTION),
+                    ModPotions.holderOf(ModPotions.LONG_LEVITATION_POTION),
+                    ModPotions.holderOf(ModPotions.STRONG_LEVITATION_POTION),
+                    true);
         }
 
         if (MorePotionsCommonConfigs.DECAY_POTION_ENABLED.get()) {
             builder.addMix(Potions.AWKWARD, Items.WITHER_ROSE, ModPotions.holderOf(ModPotions.DECAY_POTION));
-            registerStandardModifiers(builder, ModPotions.holderOf(ModPotions.DECAY_POTION), ModPotions.holderOf(ModPotions.LONG_DECAY_POTION), ModPotions.holderOf(ModPotions.STRONG_DECAY_POTION), true);
+            registerStandardModifiers(builder,
+                    ModPotions.holderOf(ModPotions.DECAY_POTION),
+                    ModPotions.holderOf(ModPotions.LONG_DECAY_POTION),
+                    ModPotions.holderOf(ModPotions.STRONG_DECAY_POTION),
+                    true);
         }
 
         if (MorePotionsCommonConfigs.NAUSEA_POTION_ENABLED.get()) {
             builder.addMix(Potions.AWKWARD, Items.POISONOUS_POTATO, ModPotions.holderOf(ModPotions.NAUSEA_POTION));
-            registerStandardModifiers(builder, ModPotions.holderOf(ModPotions.NAUSEA_POTION), ModPotions.holderOf(ModPotions.LONG_NAUSEA_POTION), ModPotions.holderOf(ModPotions.STRONG_NAUSEA_POTION), true);
+            registerStandardModifiers(builder,
+                    ModPotions.holderOf(ModPotions.NAUSEA_POTION),
+                    ModPotions.holderOf(ModPotions.LONG_NAUSEA_POTION),
+                    ModPotions.holderOf(ModPotions.STRONG_NAUSEA_POTION),
+                    true);
         }
 
         if (MorePotionsCommonConfigs.LUCK_POTION_ENABLED.get()) {
@@ -67,16 +84,30 @@ public class MorePotions {
 
         if (MorePotionsCommonConfigs.GLOWING_POTION_ENABLED.get()) {
             builder.addMix(Potions.AWKWARD, Items.GLOW_INK_SAC, ModPotions.holderOf(ModPotions.GLOWING_POTION));
-            registerStandardModifiers(builder, ModPotions.holderOf(ModPotions.GLOWING_POTION), ModPotions.holderOf(ModPotions.LONG_GLOWING_POTION), null, false);
+            registerStandardModifiers(builder,
+                    ModPotions.holderOf(ModPotions.GLOWING_POTION),
+                    ModPotions.holderOf(ModPotions.LONG_GLOWING_POTION),
+                    null,
+                    false);
         }
 
         if (MorePotionsCommonConfigs.BLINDNESS_POTION_ENABLED.get()) {
             builder.addMix(Potions.AWKWARD, Items.INK_SAC, ModPotions.holderOf(ModPotions.BLINDNESS_POTION));
-            registerStandardModifiers(builder, ModPotions.holderOf(ModPotions.BLINDNESS_POTION), ModPotions.holderOf(ModPotions.LONG_BLINDNESS_POTION), null, false);
+            registerStandardModifiers(builder,
+                    ModPotions.holderOf(ModPotions.BLINDNESS_POTION),
+                    ModPotions.holderOf(ModPotions.LONG_BLINDNESS_POTION),
+                    null,
+                    false);
         }
     }
 
-    private static void registerStandardModifiers(net.minecraft.world.item.alchemy.PotionBrewing.Builder builder, Holder<Potion> base, Holder<Potion> extended, Holder<Potion> amplified, boolean canAmplify) {
+    private static void registerStandardModifiers(
+            net.minecraft.world.item.alchemy.PotionBrewing.Builder builder,
+            Holder<Potion> base,
+            Holder<Potion> extended,
+            Holder<Potion> amplified,
+            boolean canAmplify
+    ) {
         builder.addMix(base, Items.REDSTONE, extended);
 
         if (canAmplify && amplified != null) {
