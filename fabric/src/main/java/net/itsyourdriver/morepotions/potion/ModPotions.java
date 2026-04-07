@@ -10,37 +10,39 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 
+import java.lang.reflect.Constructor;
+
 public final class ModPotions {
     public static final RegistryEntry<Potion> LEVITATION_POTION = registerPotion("levitation_potion",
-            new Potion(new StatusEffectInstance(StatusEffects.LEVITATION, 600, 0)));
+            createPotion(new StatusEffectInstance(StatusEffects.LEVITATION, 600, 0)));
     public static final RegistryEntry<Potion> LONG_LEVITATION_POTION = registerPotion("long_levitation_potion",
-            new Potion(new StatusEffectInstance(StatusEffects.LEVITATION, 1800, 0)));
+            createPotion(new StatusEffectInstance(StatusEffects.LEVITATION, 1800, 0)));
     public static final RegistryEntry<Potion> STRONG_LEVITATION_POTION = registerPotion("strong_levitation_potion",
-            new Potion(new StatusEffectInstance(StatusEffects.LEVITATION, 600, 1)));
+            createPotion(new StatusEffectInstance(StatusEffects.LEVITATION, 600, 1)));
 
     public static final RegistryEntry<Potion> DECAY_POTION = registerPotion("decay_potion",
-            new Potion(new StatusEffectInstance(StatusEffects.WITHER, 900, 0)));
+            createPotion(new StatusEffectInstance(StatusEffects.WITHER, 900, 0)));
     public static final RegistryEntry<Potion> LONG_DECAY_POTION = registerPotion("long_decay_potion",
-            new Potion(new StatusEffectInstance(StatusEffects.WITHER, 1800, 0)));
+            createPotion(new StatusEffectInstance(StatusEffects.WITHER, 1800, 0)));
     public static final RegistryEntry<Potion> STRONG_DECAY_POTION = registerPotion("strong_decay_potion",
-            new Potion(new StatusEffectInstance(StatusEffects.WITHER, 900, 1)));
+            createPotion(new StatusEffectInstance(StatusEffects.WITHER, 900, 1)));
 
     public static final RegistryEntry<Potion> NAUSEA_POTION = registerPotion("nausea_potion",
-            new Potion(new StatusEffectInstance(StatusEffects.NAUSEA, 300, 0)));
+            createPotion(new StatusEffectInstance(StatusEffects.NAUSEA, 300, 0)));
     public static final RegistryEntry<Potion> LONG_NAUSEA_POTION = registerPotion("long_nausea_potion",
-            new Potion(new StatusEffectInstance(StatusEffects.NAUSEA, 900, 0)));
+            createPotion(new StatusEffectInstance(StatusEffects.NAUSEA, 900, 0)));
     public static final RegistryEntry<Potion> STRONG_NAUSEA_POTION = registerPotion("strong_nausea_potion",
-            new Potion(new StatusEffectInstance(StatusEffects.NAUSEA, 300, 1)));
+            createPotion(new StatusEffectInstance(StatusEffects.NAUSEA, 300, 1)));
 
     public static final RegistryEntry<Potion> GLOWING_POTION = registerPotion("glowing_potion",
-            new Potion(new StatusEffectInstance(StatusEffects.GLOWING, 3600, 0)));
+            createPotion(new StatusEffectInstance(StatusEffects.GLOWING, 3600, 0)));
     public static final RegistryEntry<Potion> LONG_GLOWING_POTION = registerPotion("long_glowing_potion",
-            new Potion(new StatusEffectInstance(StatusEffects.GLOWING, 9600, 0)));
+            createPotion(new StatusEffectInstance(StatusEffects.GLOWING, 9600, 0)));
 
     public static final RegistryEntry<Potion> BLINDNESS_POTION = registerPotion("blindness_potion",
-            new Potion(new StatusEffectInstance(StatusEffects.BLINDNESS, 300, 0)));
+            createPotion(new StatusEffectInstance(StatusEffects.BLINDNESS, 300, 0)));
     public static final RegistryEntry<Potion> LONG_BLINDNESS_POTION = registerPotion("long_blindness_potion",
-            new Potion(new StatusEffectInstance(StatusEffects.BLINDNESS, 900, 0)));
+            createPotion(new StatusEffectInstance(StatusEffects.BLINDNESS, 900, 0)));
 
     private static final int[] LUCK_DURATIONS = {6000, 18000, 36000, 72000};
     private static final RegistryEntry<Potion>[][] LUCK_VARIANTS = createLuckVariants();
@@ -60,7 +62,7 @@ public final class ModPotions {
 
                 String id = "luck_l" + (levelIndex + 1) + "_e" + extensionIndex;
                 variants[levelIndex][extensionIndex] = registerPotion(id,
-                        new Potion(new StatusEffectInstance(StatusEffects.LUCK, LUCK_DURATIONS[extensionIndex], levelIndex)));
+                        createPotion(new StatusEffectInstance(StatusEffects.LUCK, LUCK_DURATIONS[extensionIndex], levelIndex)));
             }
         }
 
@@ -76,6 +78,21 @@ public final class ModPotions {
         }
 
         return LUCK_VARIANTS[level - 1][extensionTier];
+    }
+
+
+    private static Potion createPotion(StatusEffectInstance effect) {
+        try {
+            Constructor<Potion> single = Potion.class.getConstructor(StatusEffectInstance.class);
+            return single.newInstance(effect);
+        } catch (ReflectiveOperationException ignored) {
+            try {
+                Constructor<Potion> varargs = Potion.class.getConstructor(StatusEffectInstance[].class);
+                return varargs.newInstance((Object) new StatusEffectInstance[]{effect});
+            } catch (ReflectiveOperationException ex) {
+                throw new IllegalStateException("Unable to construct Potion instance", ex);
+            }
+        }
     }
 
     private static RegistryEntry<Potion> registerPotion(String id, Potion potion) {
