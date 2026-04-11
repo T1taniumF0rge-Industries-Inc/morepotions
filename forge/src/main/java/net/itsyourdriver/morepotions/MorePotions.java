@@ -22,7 +22,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
-import java.lang.reflect.Method;
 
 @Mod(MorePotions.MOD_ID)
 public class MorePotions {
@@ -30,7 +29,7 @@ public class MorePotions {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public MorePotions() {
-        IEventBus modEventBus = resolveModEventBus();
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModPotions.register(modEventBus);
 
@@ -47,24 +46,6 @@ public class MorePotions {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-
-    private static IEventBus resolveModEventBus() {
-        try {
-            Object loadingContext = FMLJavaModLoadingContext.class.getMethod("get").invoke(null);
-            Method getModEventBus = loadingContext.getClass().getMethod("getModEventBus");
-            return (IEventBus) getModEventBus.invoke(loadingContext);
-        } catch (ReflectiveOperationException primaryException) {
-            try {
-                Object loadingContext = FMLJavaModLoadingContext.class.getMethod("get").invoke(null);
-                Method getContainer = loadingContext.getClass().getMethod("getContainer");
-                Object container = getContainer.invoke(loadingContext);
-                Method getEventBus = container.getClass().getMethod("getEventBus");
-                return (IEventBus) getEventBus.invoke(container);
-            } catch (ReflectiveOperationException fallbackException) {
-                throw new IllegalStateException("Unable to resolve Forge mod event bus", fallbackException);
-            }
-        }
-    }
 
     private void commonSetup(final FMLCommonSetupEvent event) {}
 
