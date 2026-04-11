@@ -11,8 +11,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 public final class ModPotions {
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(Registries.POTION, MorePotions.MOD_ID);
@@ -87,51 +85,7 @@ public final class ModPotions {
     }
 
     private static Potion createPotion(MobEffectInstance effect) {
-        MobEffectInstance[] singleEffect = new MobEffectInstance[]{effect};
-
-        Potion potion = tryConstructPotion(new Class<?>[]{String.class, MobEffectInstance[].class}, "", singleEffect);
-        if (potion != null) {
-            return potion;
-        }
-
-        potion = tryConstructPotion(new Class<?>[]{MobEffectInstance.class}, effect);
-        if (potion != null) {
-            return potion;
-        }
-
-        potion = tryConstructPotion(new Class<?>[]{MobEffectInstance[].class}, (Object) singleEffect);
-        if (potion != null) {
-            return potion;
-        }
-
-        for (Constructor<?> constructor : Potion.class.getConstructors()) {
-            Class<?>[] parameterTypes = constructor.getParameterTypes();
-            try {
-                if (parameterTypes.length == 2
-                        && parameterTypes[0] == String.class
-                        && parameterTypes[1] == MobEffectInstance[].class) {
-                    return (Potion) constructor.newInstance("", singleEffect);
-                }
-                if (parameterTypes.length == 1 && parameterTypes[0] == MobEffectInstance.class) {
-                    return (Potion) constructor.newInstance(effect);
-                }
-                if (parameterTypes.length == 1 && parameterTypes[0] == MobEffectInstance[].class) {
-                    return (Potion) constructor.newInstance((Object) singleEffect);
-                }
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException ignored) {
-            }
-        }
-
-        throw new IllegalStateException("Unable to construct Potion instance for current Minecraft runtime");
-    }
-
-    private static Potion tryConstructPotion(Class<?>[] parameterTypes, Object... args) {
-        try {
-            Constructor<Potion> constructor = Potion.class.getConstructor(parameterTypes);
-            return constructor.newInstance(args);
-        } catch (ReflectiveOperationException ignored) {
-            return null;
-        }
+        return new Potion("", effect);
     }
 
     public static void register(IEventBus eventBus) {

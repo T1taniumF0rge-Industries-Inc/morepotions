@@ -10,8 +10,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 public final class ModPotions {
     public static final RegistryEntry<Potion> LEVITATION_POTION = registerPotion("levitation_potion",
@@ -83,55 +81,7 @@ public final class ModPotions {
 
 
     private static Potion createPotion(StatusEffectInstance effect) {
-        StatusEffectInstance[] singleEffect = new StatusEffectInstance[]{effect};
-
-        // 1.21+ style in some versions/loaders.
-        Potion potion = tryConstructPotion(new Class<?>[]{String.class, StatusEffectInstance[].class}, "", singleEffect);
-        if (potion != null) {
-            return potion;
-        }
-
-        // Legacy single-effect constructor.
-        potion = tryConstructPotion(new Class<?>[]{StatusEffectInstance.class}, effect);
-        if (potion != null) {
-            return potion;
-        }
-
-        // Legacy varargs constructor.
-        potion = tryConstructPotion(new Class<?>[]{StatusEffectInstance[].class}, (Object) singleEffect);
-        if (potion != null) {
-            return potion;
-        }
-
-        // Safety fallback for edge mappings/loader combos.
-        for (Constructor<?> constructor : Potion.class.getConstructors()) {
-            Class<?>[] parameterTypes = constructor.getParameterTypes();
-            try {
-                if (parameterTypes.length == 2
-                        && parameterTypes[0] == String.class
-                        && parameterTypes[1] == StatusEffectInstance[].class) {
-                    return (Potion) constructor.newInstance("", singleEffect);
-                }
-                if (parameterTypes.length == 1 && parameterTypes[0] == StatusEffectInstance.class) {
-                    return (Potion) constructor.newInstance(effect);
-                }
-                if (parameterTypes.length == 1 && parameterTypes[0] == StatusEffectInstance[].class) {
-                    return (Potion) constructor.newInstance((Object) singleEffect);
-                }
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException ignored) {
-            }
-        }
-
-        throw new IllegalStateException("Unable to construct Potion instance for current Minecraft runtime");
-    }
-
-    private static Potion tryConstructPotion(Class<?>[] parameterTypes, Object... args) {
-        try {
-            Constructor<Potion> constructor = Potion.class.getConstructor(parameterTypes);
-            return constructor.newInstance(args);
-        } catch (ReflectiveOperationException ignored) {
-            return null;
-        }
+        return new Potion("", effect);
     }
 
     private static RegistryEntry<Potion> registerPotion(String id, Potion potion) {
